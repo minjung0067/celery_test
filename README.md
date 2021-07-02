@@ -1,1 +1,1 @@
-# celeryt_test
+# celery_test
