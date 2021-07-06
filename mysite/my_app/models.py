@@ -10,7 +10,7 @@ class TestModel(models.Model):
     
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
-    
+
 class Qna(models.Model):
     name = models.CharField(max_length=50)
     email = models.CharField(max_length=50, null=True)
@@ -20,3 +20,9 @@ class Qna(models.Model):
 
     class Meta:
         db_table = 'qna'
+
+class Upload(models.Model):
+    image = models.ImageField(upload_to='images')
+
+    def __str__(self):
+        return str(self.pk)

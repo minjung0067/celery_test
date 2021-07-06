@@ -1,0 +1,39 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>upload project</title>
+  </head>
+  <body>
+      <h1> Hello ! </h1>
+      <div class='progress-wrapper'>
+        <div id='progress-bar' class='progress-bar' style="background-color: #bb33f1; width: 0%;">&nbsp;</div>
+      </div>
+      <div id="progress-bar-message">Waiting for progress to start...{{task_id}}</div>
+      
+
+      <div id="celery-result"></div>
+    </body>
+    <script src="{% static 'celery_progress.js' %}"></script>
+    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript">
+      // JQuery
+      var progressUrl = "{% url 'celery_progress:task_status' task_id %}";
+
+      function customResult(resultElement, result) {
+        $( resultElement ).append(
+          $('<p>').text('Sum of all seconds is ' + result)
+        );
+      }
+
+      $(function () {
+        CeleryProgressBar.initProgressBar(progressUrl, {
+          onResult: customResult,
+        })
+      });
+    </script>
+
+</html>
